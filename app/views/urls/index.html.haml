@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-lg-1.col-md-2.col-sm-12.col-xs-12
+    .col-lg-10.col-md-8.col-sm-12.col-xs-12
+      %h3 List of treanding urls
+      %table.table.table-responsive.table-bordered
+        %thead
+          %tr
+            %th Original url
+            %th Pageviews
+       
+
+        %tbody
+          - @urls.each do |url|
+            %tr
+              %td.col-md-10= url.original_url
+              %td.col-md-2= url.pageviews
+              / %td= url.visitor_count
+    .col-lg-1.col-md-2.col-sm-12.col-xs-12
+          

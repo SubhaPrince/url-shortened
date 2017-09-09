@@ -1,5 +1,12 @@
 class UrlsController < ApplicationController
   include UrlsHelper
+  # GET /urls
+  # GET /urls.json
+  def index
+    @urls = Url.all.order("pageviews DESC").limit(100)
+  end
+
+
   # GET /urls/new
   def new
     @url = Url.new
