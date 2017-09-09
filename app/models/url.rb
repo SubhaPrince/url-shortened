@@ -1,7 +1,7 @@
 class Url < ActiveRecord::Base
   validates_uniqueness_of :original_url
   after_create :add_short_url_to_url
-  after_update :update_pageviews
+  after_commit :update_pageviews
 
   def add_short_url_to_url
     # Generate the epoch token to identify uniquely
@@ -65,4 +65,6 @@ class Url < ActiveRecord::Base
   def self.duplicate(params)
     Url.where("original_url =?", params[:original_url]).take
   end
+
+  
 end
