@@ -1,7 +1,7 @@
 # url-shortened
   # Demo
     https://urlshortnerhero.herokuapp.com/
- # Requirements
+# Requirements
   mysql database gem [To stored the original database]
   rails 4.2.1 gem
   haml gem [designed to make it both easier and more pleasant to write HTML documents]
@@ -10,10 +10,13 @@
   
  # Installation
   git clone https://github.com/SubhaPrince/url-shortened.git
+  
   cd url-shortened
-  Modify settings.rb to match your database. The default is “url-shortened_development”.
-  run "bundle install" [Install all the dependecies] 
+  
+  run "bundle install" [Install all the dependecies]
+  
   run "rake db:create" [create the database for the application]
+  
   run "rake db:migrate" [makes changes to the existing schema]
   
  # Usage
@@ -26,3 +29,4 @@
     provides CAPTCHA verificatio
     Paginition for trending urls dashboard
     Handle invalid link
+    
