@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-lg-2.col-md-2.col-sm-12.col-xs-12
+    .col-lg-8.col-md-8.col-sm-12.col-xs-12
+      .main_bar
+      .vertical-center
+        %h4 Enter a long URL to make shorten
+        .input-url
+          = render "form"
+        .output-url
+          = link_to params[:short_url], generate_url(params[:short_url]), target: "_blank" if params[:short_url].present?
+    .col-lg-8.col-md-8.col-sm-12.col-xs-12
+        

@@ -1,0 +1,8 @@
+.form-group.row
+  = form_for @url do |f|
+    .input-group
+      = f.text_field :original_url, class: "input form-control input-lg", placeholder: "Paste a link to shorten it", required: true 
+      %span.input-group-btn
+        = f.submit 'Create shorten', :class => "actions btn btn-info btn-lg"
+
+

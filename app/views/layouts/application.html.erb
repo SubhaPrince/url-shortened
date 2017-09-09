@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UrlShortener</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <%= render "share/nav_bar"%>
+<%= yield %>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('li.active').removeClass('active');
+      $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+    });
+</script>
