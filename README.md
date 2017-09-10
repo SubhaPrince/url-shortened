@@ -3,8 +3,11 @@
     https://urlshortnerhero.herokuapp.com/
 # Requirements
   mysql database gem [To stored the original database]
+  
   rails 4.2.1 gem
+  
   haml gem [designed to make it both easier and more pleasant to write HTML documents]
+  
   twitter-bootstrap-rails gem
   
   
@@ -26,7 +29,7 @@
   The production settings are ready to be used for heroku so you should be good to go if you wanted to deploy to heroku. Currently This project is running on heroku.
   
   # Todo
-    provides CAPTCHA verificatio
+    provides CAPTCHA verification
     Paginition for trending urls dashboard
     Handle invalid link
     
