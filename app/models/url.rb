@@ -3,10 +3,17 @@ class Url < ActiveRecord::Base
   after_create :add_short_url_to_url
   after_commit :update_pageviews
 
+
+  # def add_short_url_to_url
+  #   # Generate the epoch token to identify uniquely
+  #   # Base36 initializer
+  #   self.update_columns( short_url: Base36.encode(Time.now.to_i) )
+  # end
+  
   def add_short_url_to_url
-    # Generate the epoch token to identify uniquely
-    # Base36 initializer
-    self.update_columns( short_url: Base36.encode(Time.now.to_i) )
+    # converting it to MD5 hash and taking the first 7 chars
+    # 7 chars of Base62 is enough for 6 chars of Base36. 36^7 > 62^6.
+    self.update_columns( short_url: self.original_url.encode_url )
   end
 
   # update total number of pageviews for a particuler URL
@@ -66,5 +73,5 @@ class Url < ActiveRecord::Base
     Url.where("original_url =?", params[:original_url]).take
   end
 
-  
+
 end
