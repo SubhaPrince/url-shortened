@@ -26,7 +26,8 @@ class UrlsController < ApplicationController
   def redirect
     # this method returns external URL
     shortened_url = Url.find_by_short_url(params[:short_url])
-
+    # update page view
+    shortened_url.update_pageviews
     # generate_url is a helper method which will helps to format the URL
     redirect_to generate_url(shortened_url.original_url)
   end
