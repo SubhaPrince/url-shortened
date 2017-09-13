@@ -10,7 +10,7 @@ class Base62
   # <returns>Corresponding shorten URL</returns>
   def self.encode( value )
     # Constructing and avoing some words which makes confused
-    base62 = ([ *0..9, *'a'..'z', *'A'..'Z' ] - %w[i I 1 o u l O 0]).join
+    base62 = ([ *0..9, *'a'..'z', *'A'..'Z' ] - %w[i I 1 l 0 O 0]).join
     ring = ENCODER[base62]
     base = base62.length
     result = []
