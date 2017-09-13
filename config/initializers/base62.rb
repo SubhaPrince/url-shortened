@@ -3,6 +3,7 @@ class Base62
     # Converts String to a Hash
     Hash[ k.chars.map.with_index.to_a.map(&:reverse) ]
   end
+  
   #<summary>
   #This method generates shorten URL
   # </summary>

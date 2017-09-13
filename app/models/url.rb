@@ -1,15 +1,18 @@
 class Url < ActiveRecord::Base
   validates_uniqueness_of :original_url
   after_create :add_short_url_to_url
+  
   def add_short_url_to_url
     # Generate the epoch token to identify uniquely
     # Base62 initializer
     self.update_columns( short_url: Base62.encode(self.id) )
   end
+
   # update total number of pageviews for a particuler URL
   def update_pageviews
     self.update_columns( pageviews: self.pageviews+1)
   end
+
   def self.create_update_with(params)
     dup = Url.duplicate(params)
     if dup.present?
@@ -19,6 +22,7 @@ class Url < ActiveRecord::Base
     end
     return url
   end
+
   #Overwrite the create method
   def self.create(params)
     puts params[:original_url]
@@ -41,6 +45,7 @@ class Url < ActiveRecord::Base
       return nil
     end
   end
+
   #overwrite the update method
   def update(params)
     self.original_url = params[:original_url] if params[:original_url].present?
@@ -49,6 +54,7 @@ class Url < ActiveRecord::Base
     self.save
     return self
   end
+
   # Check the duplicate original_url in the database
   # If the original_url is present then return the mathing url objects
   # otherwise it returns the nil object
