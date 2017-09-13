@@ -29,17 +29,14 @@ class Url < ActiveRecord::Base
     url = Url.new
     retry_count = 2
     begin
-      #if
       if params[:original_url].blank?
         raise ArgumentError.new("original_url is a required field")
       end
-
       url.original_url = params[:original_url]
       url.short_url = params[:short_url] if  params[:short_url].present?
       url.pageviews = params[:pageviews] if  params[:pageviews].present?
       url.save
       return url
-
     rescue ActiveRecord::RecordNotUnique => e
       puts "DEBUG>> caught record not unique exception while making URL: #{e.message}"
       retry_count -= 1
@@ -64,6 +61,4 @@ class Url < ActiveRecord::Base
   def self.duplicate(params)
     Url.where("original_url =?", params[:original_url]).take
   end
-
-
 end

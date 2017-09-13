@@ -6,7 +6,6 @@ class UrlsController < ApplicationController
     @urls = Url.all.order("pageviews DESC").limit(100)
   end
 
-
   # GET /urls/new
   def new
     @url = Url.new
@@ -31,9 +30,7 @@ class UrlsController < ApplicationController
     # generate_url is a helper method which will helps to format the URL
     redirect_to generate_url(shortened_url.original_url)
   end
-
-
-
+  
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def url_params
