@@ -1,4 +1,5 @@
 class Url < ActiveRecord::Base
+  require 'csv'
   validates_uniqueness_of :original_url
   validates_uniqueness_of :short_url
   after_create :add_short_url_to_url
@@ -60,6 +61,17 @@ class Url < ActiveRecord::Base
   # If the original_url is present then return the mathing url objects
   # otherwise it returns the nil object
   def self.duplicate(params)
-    Url.where("original_url =?", params[:original_url]).take
+    where("original_url =?", params[:original_url]).take
   end
+
+  # A class method import, with file passed through as an argument
+  def self.import(file)
+    # A blocks that runs through a loop in our CSV file
+    CSV.foreach(file.path, headers: true) do |row|
+      # create a short_url for each row 
+      url = row.to_hash
+      Url.create_update_with({original_url: url['urls']})
+    end
+  end
+
 end

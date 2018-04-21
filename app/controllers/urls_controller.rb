@@ -11,15 +11,26 @@ class UrlsController < ApplicationController
     @url = Url.new
   end
 
-  #<summary>
-  #This method stores actual URL in database
-  # </summary>
-  # <param name="url_params">The actual URL</param>
-  # <returns>Corresponding shorten URL</returns>
+  # => <summary>
+  # =>  This method stores actual URL in database
+  # => </summary>
+  # => <param name="file"> CSV file </param>
+  # => <param name="url_params">The actual URL</param>
+  # => <returns>Corresponding shorten URL</returns>
   def create
-    @url = Url.create_update_with(url_params)
-    @short_url = "#{request.host_with_port}/#{@url.short_url}"
-    redirect_to root_path(short_url: @short_url)
+    if url_params[:file].present?
+      puts url_params[:file]
+      Url.import(url_params[:file]) 
+      redirect_to root_path, notice: 'Successfully uploaded'
+    elsif url_params[:original_url].present?
+      
+      @url = Url.create_update_with(url_params)
+      @short_url = "#{request.host_with_port}/#{@url.short_url}"
+      redirect_to root_path(short_url: @short_url)
+    else
+      redirect_to root_path, alert: 'Please enter the URL in the text box or choose the csv file'
+    end
+
   end
 
   def redirect
@@ -30,10 +41,10 @@ class UrlsController < ApplicationController
     # generate_url is a helper method which will helps to format the URL
     redirect_to generate_url(shortened_url.original_url)
   end
-  
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def url_params
-    params.require(:url).permit(:original_url, :short_url)
+    params.require(:url).permit(:original_url, :short_url, :file)
   end
 end

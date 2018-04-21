@@ -7,6 +7,8 @@
         %h4 Enter a long URL to make shorten
         .input-url
           = render "form"
+          %p#alert.alert-danger
+            = alert
         .output-url
           = link_to params[:short_url], generate_url(params[:short_url]), target: "_blank" if params[:short_url].present?
     .col-lg-8.col-md-8.col-sm-12.col-xs-12

@@ -1,8 +1,16 @@
-.form-group.row
+.form-group
   = form_for @url do |f|
-    .input-group
-      = f.text_field :original_url, class: "input form-control input-lg", placeholder: "Paste a link to shorten it", required: true 
-      %span.input-group-btn
-        = f.submit 'Create shorten', :class => "actions btn btn-info btn-lg"
+    .input-group.row
+      .col-lg-5
+        = f.text_field :original_url, class: "input form-control input-lg", placeholder: "Paste a link to shorten it"
+      .col-lg-1
+        OR
+      .col-lg-4
+        = f.file_field :file, class: "input form-control input-lg"
+        %p#notice.alert-success
+          = notice
+      .col-lg-2
+        %span.input-group-btn
+          = f.submit 'Create shorten', :class => "actions btn btn-info btn-lg"
 
 
