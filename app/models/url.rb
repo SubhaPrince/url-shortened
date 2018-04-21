@@ -1,5 +1,6 @@
 class Url < ActiveRecord::Base
   validates_uniqueness_of :original_url
+  validates_uniqueness_of :short_url
   after_create :add_short_url_to_url
   
   def add_short_url_to_url
