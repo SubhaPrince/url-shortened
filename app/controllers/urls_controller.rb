@@ -1,4 +1,5 @@
 class UrlsController < ApplicationController
+  before_action :set_url, only: [:destroy]
   include UrlsHelper
   # GET /urls
   # GET /urls.json
@@ -20,10 +21,10 @@ class UrlsController < ApplicationController
   def create
     if url_params[:file].present?
       puts url_params[:file]
-      Url.import(url_params[:file]) 
+      Url.import(url_params[:file])
       redirect_to root_path, notice: 'Successfully uploaded'
     elsif url_params[:original_url].present?
-      
+
       @url = Url.create_update_with(url_params)
       @short_url = "#{request.host_with_port}/#{@url.short_url}"
       redirect_to root_path(short_url: @short_url)
@@ -42,7 +43,21 @@ class UrlsController < ApplicationController
     redirect_to generate_url(shortened_url.original_url)
   end
 
+  # DELETE /url/1
+  def destroy
+    @url.destroy
+    respond_to do |format|
+      format.html { redirect_to urls_url, notice: 'url was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_url
+    @url = Url.find(params[:id])
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def url_params
     params.require(:url).permit(:original_url, :short_url, :file)

@@ -8,11 +8,14 @@
           %tr
             %th Shortened urls
             %th Pageviews
+            %th
         %tbody
           - @urls.each do |url|
             %tr
               %td.col-md-10= link_to url.original_url,"#{request.host_with_port}/#{url.short_url}"
               %td.col-md-2= url.pageviews
               / %td= url.visitor_count
+              %td
+                = link_to 'Delete', url, method: :delete, data: { confirm: 'Are you sure?' }
     .col-lg-1.col-md-2.col-sm-12.col-xs-12
           
