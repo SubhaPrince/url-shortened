@@ -7,7 +7,8 @@ class Url < ActiveRecord::Base
   def add_short_url_to_url
     # Generate the epoch token to identify uniquely
     # Base62 initializer
-    self.update_columns( short_url: Base62.encode(self.id) )
+    srturl = "#{request.host_with_port}/#{Base62.encode(self.id)}"
+    self.update_columns( short_url:  srturl)
   end
 
   # update total number of pageviews for a particuler URL
