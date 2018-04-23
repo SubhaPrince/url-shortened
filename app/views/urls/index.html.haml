@@ -12,7 +12,7 @@
         %tbody
           - @urls.each do |url|
             %tr
-              %td.col-md-10= link_to url.short_url,"#{url.short_url}"
+              %td.col-md-10= link_to url.short_url, short_url_urls_path(generate_url(url.short_url), short_url: url.short_url), target: "_blank"
               %td.col-md-2= url.pageviews
               / %td= url.visitor_count
               %td
