@@ -59,7 +59,7 @@ class Api::V1::UrlsController < Api::V1::ApplicationController
     if params[:original_url].present?
       @url = Url.new
       @url = Url.create_update_with(params)
-      @short_url = "#{request.host_with_port}/#{@url.short_url}"
+      @short_url = "#{@url.short_url}"
       json_object[:status] = :ok
       render json: json_object, each_serializer: Api::V1::UrlsSerializer
     else
@@ -69,13 +69,12 @@ class Api::V1::UrlsController < Api::V1::ApplicationController
 
   end
 
-  def redirect
+  def get_original_url
     # this method returns external URL and Update the page views
-    shortened_url = Url.find_by_short_url(params[:short_url])
+    url = Url.find_by_short_url(params[:short_url])
     # update page view
-    shortened_url.update_pageviews
-    # generate_url is a helper method which will helps to format the URL
-    redirect_to generate_url(shortened_url.original_url)
+    url.update_pageviews
+    render json: url, serializer: Api::V1::UrlsSerializer
   end
 
   #> -----------------------------------------------------------------------

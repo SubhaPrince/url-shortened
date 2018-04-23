@@ -26,7 +26,7 @@ class UrlsController < ApplicationController
     elsif url_params[:original_url].present?
 
       @url = Url.create_update_with(url_params)
-      @short_url = "#{request.host_with_port}/#{@url.short_url}"
+      @short_url = "#{@url.short_url}"
       redirect_to root_path(short_url: @short_url)
     else
       redirect_to root_path, alert: 'Please enter the URL in the text box or choose the csv file'

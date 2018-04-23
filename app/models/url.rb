@@ -3,11 +3,12 @@ class Url < ActiveRecord::Base
   validates_uniqueness_of :original_url
   validates_uniqueness_of :short_url
   after_create :add_short_url_to_url
+  cattr_accessor :host_with_port
   
   def add_short_url_to_url
     # Generate the epoch token to identify uniquely
     # Base62 initializer
-    srturl = "#{request.host_with_port}/#{Base62.encode(self.id)}"
+    srturl = "#{Url.host_with_port}/#{Base62.encode(self.id)}"
     self.update_columns( short_url:  srturl)
   end
 

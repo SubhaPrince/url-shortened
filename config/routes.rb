@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :urls do
         collection do
           get :short_urls
+          get :get_original_url
         end
       end
     end
