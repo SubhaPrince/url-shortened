@@ -69,6 +69,21 @@ class Api::V1::UrlsController < Api::V1::ApplicationController
 
   end
 
+  #> -----------------------------------------------------------------------
+  #> GET /api/v1/urls/get_original_url
+  #> -----------------------------------------------------------------------
+  #>
+  #> PARAMETERS:
+  #> - short_url: string  : mandatory
+
+  #> RETURNS:
+  #> {  'item' => {
+
+  #>              }
+  #>   'status'  => '200'
+  #> }
+
+
   def get_original_url
     # this method returns external URL and Update the page views
     url = Url.find_by_short_url(params[:short_url])
