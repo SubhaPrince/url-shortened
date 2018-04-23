@@ -44,7 +44,7 @@ class Api::V1::UrlsController < Api::V1::ApplicationController
   end
 
   #> -----------------------------------------------------------------------
-  #> POST /api/urls/
+  #> POST /api/v1/urls/
   #> -----------------------------------------------------------------------
   #>
   #> PARAMETERS:
@@ -93,7 +93,7 @@ class Api::V1::UrlsController < Api::V1::ApplicationController
   end
 
   #> -----------------------------------------------------------------------
-  #> delete /api/urls
+  #> delete /api/v1/urls
   #> -----------------------------------------------------------------------
   #> PARAMETERS:
   #> - id: integer  : mandatory
